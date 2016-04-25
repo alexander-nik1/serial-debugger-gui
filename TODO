@@ -5,3 +5,5 @@ Make accessible an additional options of serial port, like a software control,
 hardware control, and so on.
 
 Make accessible an echo mode.
+
+Make a check for port busy by somebody.

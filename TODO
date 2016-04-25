@@ -1,1 +1,7 @@
- 
+
+Make a hexadecimal format for sending and receiving the data.
+
+Make accessible an additional options of serial port, like a software control,
+hardware control, and so on.
+
+Make accessible an echo mode.

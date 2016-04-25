@@ -83,7 +83,7 @@ set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt5core5a,libqt5widgets5,libqt5serialport5"
 SET(CPACK_PACKAGE_VENDOR "Alexander")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY " Serial ports debugger")
 set(CPACK_PACKAGE_DESCRIPTION " Serial ports hardware debugger. This program allows you control all lines of the serial port.")
-set(CPACK_PACKAGE_CONTACT "Alexander Kovylin alexander-nik1@yandex.ru")
+set(CPACK_PACKAGE_CONTACT "Alexander Kovylin alex.northfield@gmail.com")
 
 set(PROJECT_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}-${VERSION_PATCH}")
 

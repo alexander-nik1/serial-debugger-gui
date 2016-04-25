@@ -1,7 +1,23 @@
 
 Simple project to debugging the serial ports.
 
-Alexander Kovylin, alexander-nik1@yandex.ru
+
+To build it:
+
+mkdir build
+cd build
+cmake ..
+make package
+
+
+To install it:
+
+sudo dpkg -i serial-debugger-gui_(*)_i386.deb
+
+* - is a data and time.
+
+
+Alexander Kovylin, alex.northfield@gmail.com
 04.2016.
 
 Thank you.

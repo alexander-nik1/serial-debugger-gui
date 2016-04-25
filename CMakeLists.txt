@@ -60,3 +60,29 @@ set(CMAKE_CXX_FLAGS "-std=c++11")
 add_executable(${projname} ${SRC} ${FORMS_HEADERS})
 
 qt5_use_modules(${projname} Core SerialPort Widgets)
+
+
+###########################################################################################
+
+INSTALL(PROGRAMS bin/serial-debugger-gui DESTINATION /usr/bin)
+
+set(MAJOR_VERSION "1")
+set(MINOR_VERSION "2")
+set(PATCH_VERSION "8")
+
+set(CPACK_GENERATOR "DEB")
+SET(CPACK_PACKAGE_VERSION_MAJOR "${MAJOR_VERSION}")
+SET(CPACK_PACKAGE_VERSION_MINOR "${MINOR_VERSION}")
+SET(CPACK_PACKAGE_VERSION_PATCH "${PATCH_VERSION}")
+set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE "i386")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt5core5a,libqt5widgets5,libqt5serialport5")
+SET(CPACK_PACKAGE_VENDOR "Alexander")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY " Serial ports debugger")
+set(CPACK_PACKAGE_DESCRIPTION " Serial ports hardware debugger. This program allows you control all lines of the serial port.")
+set(CPACK_PACKAGE_CONTACT "Alexander Kovylin alexander-nik1@yandex.ru")
+
+set(PROJECT_VERSION "${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}")
+
+set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}_${PROJECT_VERSION}_${CPACK_DEBIAN_PACKAGE_ARCHITECTURE}")
+
+include(CPack)

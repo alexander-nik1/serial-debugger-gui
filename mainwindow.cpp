@@ -195,34 +195,51 @@ void MainWindow::onSerialPortReadyRead()
     statusLabel->setText(s);
 }
 
-void setEditSignalValue(QLineEdit* _le, bool _value) {
-
-    if(_value)
+void setEditSignalValue(QLineEdit* _le, int _code)
+{
+    switch(_code)
     {
-        _le->setStyleSheet("color: black; background-color: yellow");
-        _le->setText("1");
-    }
-    else
-    {
+    case 0:
         _le->setStyleSheet("color: yellow; background-color: black");
         _le->setText("0");
-    }
+        break;
 
+    case 1:
+        _le->setStyleSheet("color: black; background-color: yellow");
+        _le->setText("1");
+        break;
+
+    default:
+        _le->setStyleSheet("color: black; background-color: black");
+        _le->setText("");
+        break;
+    }
 }
+
+#define CHECK_FLAG(_flag_)  \
+    (((ps & QSerialPort::_flag_) != 0) ? 1 : 0)
 
 void MainWindow::onTimerTimeout()
 {
-    if(!serialPort)
-        return;
-
-    const QSerialPort::PinoutSignals ps = serialPort->pinoutSignals();
-
-    setEditSignalValue(ui->DTRShowEdit, ps & QSerialPort::DataTerminalReadySignal);
-    setEditSignalValue(ui->DCDShowEdit, ps & QSerialPort::DataCarrierDetectSignal);
-    setEditSignalValue(ui->DSRShowEdit, ps & QSerialPort::DataSetReadySignal);
-    setEditSignalValue(ui->RIShowEdit, ps & QSerialPort::RingIndicatorSignal);
-    setEditSignalValue(ui->RTSShowEdit, ps & QSerialPort::RequestToSendSignal);
-    setEditSignalValue(ui->CTSShowEdit, ps & QSerialPort::ClearToSendSignal);
+    if(serialPort)
+    {
+        const QSerialPort::PinoutSignals ps = serialPort->pinoutSignals();
+        setEditSignalValue(ui->DTRShowEdit, CHECK_FLAG(DataTerminalReadySignal));
+        setEditSignalValue(ui->DCDShowEdit, CHECK_FLAG(DataCarrierDetectSignal));
+        setEditSignalValue(ui->DSRShowEdit, CHECK_FLAG(DataSetReadySignal));
+        setEditSignalValue(ui->RIShowEdit, CHECK_FLAG(RingIndicatorSignal));
+        setEditSignalValue(ui->RTSShowEdit, CHECK_FLAG(RequestToSendSignal));
+        setEditSignalValue(ui->CTSShowEdit, CHECK_FLAG(ClearToSendSignal));
+    }
+    else
+    {
+        setEditSignalValue(ui->DTRShowEdit, -1);
+        setEditSignalValue(ui->DCDShowEdit, -1);
+        setEditSignalValue(ui->DSRShowEdit, -1);
+        setEditSignalValue(ui->RIShowEdit, -1);
+        setEditSignalValue(ui->RTSShowEdit, -1);
+        setEditSignalValue(ui->CTSShowEdit, -1);
+    }
 }
 
 void MainWindow::on_pollingTimeEdit_returnPressed()

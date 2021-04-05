@@ -401,6 +401,9 @@
             </property>
            </spacer>
           </item>
+          <item row="1" column="4">
+           <layout class="QGridLayout" name="gridLayout_3"/>
+          </item>
          </layout>
         </item>
         <item>
@@ -530,12 +533,19 @@
            </spacer>
           </item>
           <item>
+           <widget class="QCheckBox" name="sencCRLFonNewLineCheck">
+            <property name="text">
+             <string>Send CR+LF on new line</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="clearAfterSendCheck">
             <property name="text">
              <string>clear after send</string>
             </property>
             <property name="checked">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>

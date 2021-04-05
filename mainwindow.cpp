@@ -9,7 +9,7 @@ enum { DEFAULT_POLLING_TIME = 250 };
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , serialPort(NULL)
+    , serialPort(nullptr)
 {
     ui->setupUi(this);
 
@@ -44,7 +44,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_openPortButton_clicked()
 {
-    if(serialPort != NULL)
+    if(serialPort != nullptr)
     {
         qWarning("%s: Serial port already opened, I will close it", __PRETTY_FUNCTION__);
         statusLabel->setText("Reopening serial port ...");
@@ -89,7 +89,7 @@ void MainWindow::on_closePortButton_clicked()
         if(serialPort->isOpen())
             serialPort->close();
         delete serialPort;
-        serialPort = NULL;
+        serialPort = nullptr;
         statusLabel->setText("Serial port closed");
 
         ui->openPortButton->setEnabled(true);
@@ -167,7 +167,13 @@ void MainWindow::on_sendTxDButton_clicked()
 
     qint64 bytesSent;
 
-    bytesSent = serialPort->write(ui->dataToSendEdit->toPlainText().toUtf8());
+    QString text = ui->dataToSendEdit->toPlainText();
+
+    if(ui->sencCRLFonNewLineCheck->isChecked()) {
+        text.replace('\n', "\n\r");
+    }
+
+    bytesSent = serialPort->write(text.toUtf8());
 
     QString s;
     s.sprintf("Sent %lld bytes", bytesSent);
@@ -249,7 +255,7 @@ void MainWindow::on_pollingTimeEdit_returnPressed()
 
     if(ok && t)
     {
-        pollingTimer->setInterval(t);
+        pollingTimer->setInterval(int(t));
         QString s;
         s.sprintf("Polling time changed to %d milliseconds", t);
         statusLabel->setText(s);

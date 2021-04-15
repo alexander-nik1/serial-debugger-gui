@@ -511,6 +511,9 @@
          </widget>
         </item>
         <item>
+         <layout class="QGridLayout" name="gridLayout_4"/>
+        </item>
+        <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <widget class="QLabel" name="label_10">
@@ -533,9 +536,16 @@
            </spacer>
           </item>
           <item>
-           <widget class="QCheckBox" name="sencCRLFonNewLineCheck">
+           <widget class="QCheckBox" name="sencCRonNewLineCheck">
             <property name="text">
-             <string>Send CR+LF on new line</string>
+             <string>Send CR on new line</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="sencLFonNewLineCheck">
+            <property name="text">
+             <string>Send LF on new line</string>
             </property>
            </widget>
           </item>
@@ -579,7 +589,7 @@
      <x>0</x>
      <y>0</y>
      <width>977</width>
-     <height>20</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>

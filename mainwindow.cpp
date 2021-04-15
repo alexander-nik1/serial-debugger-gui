@@ -169,8 +169,17 @@ void MainWindow::on_sendTxDButton_clicked()
 
     QString text = ui->dataToSendEdit->toPlainText();
 
-    if(ui->sencCRLFonNewLineCheck->isChecked()) {
+    const bool is_cr = ui->sencCRonNewLineCheck->isChecked();
+    const bool is_lf = ui->sencLFonNewLineCheck->isChecked();
+
+    if(!is_lf && is_cr) {
+        text.replace('\n', "\r");
+    }
+    else if(is_lf && is_cr) {
         text.replace('\n', "\n\r");
+    }
+    else if(!is_lf && !is_cr) {
+        text.replace('\n', "");
     }
 
     bytesSent = serialPort->write(text.toUtf8());
